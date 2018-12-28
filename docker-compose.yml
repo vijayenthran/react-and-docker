@@ -1,0 +1,12 @@
+version : '3'
+services :
+    react-app :
+      build : 
+      # Specify where we files and folders of the image are present.
+        context : ./
+        dockerfile : dockerfile.dev
+      ports :
+        - "3000:3000"
+      volumes:
+        - ./app/node_modules
+        - ./:/app    
