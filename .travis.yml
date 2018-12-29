@@ -14,5 +14,6 @@ before_install :
 # In this case we tag out docker command. So its easy for referenec.
   - docker build -t vijayjs2208/react-docker -f dockerfile.dev .
 
+# 
 script:
-  - docker run vijayjs2208/react-docker npm run test -- -- coverage
+  - docker run vijayjs2208/react-docker npm run test -- --coverage
