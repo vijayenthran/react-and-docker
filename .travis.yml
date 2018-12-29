@@ -1,0 +1,18 @@
+# travis Need sudo permissions to execute docker 
+sudo : required
+
+# we need to first install the docker cli. We instruct travis that we want the travis cli.
+services :
+  - docker
+
+# we determine the before steps that we need to build a docker file on. 
+# First we need to build our docker image.
+
+before_install :
+# THe result of docker build gives us an id. We need to then use this id to start our container with that image.
+# we dont have a way to read the console and get the id. 
+# In this case we tag out docker command. So its easy for referenec.
+  - docker build -t vijayjs2208/react-docker -f dockerfile.dev .
+
+script:
+  - docker run vijayjs2208/react-docker npm run test -- -- coverage
