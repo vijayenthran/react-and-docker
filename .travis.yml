@@ -14,6 +14,26 @@ before_install :
 # In this case we tag out docker command. So its easy for referenec.
   - docker build -t vijayjs2208/react-docker -f dockerfile.dev .
 
-# 
+# TO run scripts inside the docker container.
 script:
   - docker run vijayjs2208/react-docker npm run test -- --coverage
+
+# To deploy our applciation to the aws contianer
+deploy :
+# there are many cloud services we can use here Ex digital ocean, Aws, Heroku. etc.
+  provider : elasticbeanstalk
+# region specifies the area given for our elastic bean stalk instance.  
+  region : "us-east-2"
+# Provide the name of the app, that we used when creating a docker contianer.  
+  app :  "react-and-docker"
+  env : "ReactAndDocker-env"
+# this is like a s3 bucket. Its like a hard drive for storing the files.  
+  bucket_name : "elasticbeanstalk-us-east-2-842816718202"
+  bucket_path : "react-and-docker"
+  on :
+    branch : master
+  access_key_id : $AWS_ACCESS_KEY
+  secret_access_key : 
+    secure : "$AWS_SECRET_KEY"  
+
+
